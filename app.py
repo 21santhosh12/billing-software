@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, session
 from config import SECRET_KEY, default_user_setup_done
+import os
 
 # Import all the functions from routes package
 from routes import (
@@ -97,4 +98,5 @@ def route_get_vehicle_suggestions():
 
 if __name__ == '__main__':
     update_existing_admins()
-    app.run()
+    port = int(os.environ.get("PORT", 5000))  # Use Render's PORT or default to 5000
+    app.run(host="0.0.0.0", port=port)
